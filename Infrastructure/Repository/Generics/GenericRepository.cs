@@ -19,6 +19,7 @@ namespace Infrastructure.Repository.Generics
         {
             _OptionsBuilder = new DbContextOptions<BaseContext>();
         }
+
         public async Task Add(T objeto)
         {
             using (var data = new BaseContext(_OptionsBuilder))
