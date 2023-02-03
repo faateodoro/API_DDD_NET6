@@ -11,38 +11,38 @@ namespace Entities.Entities
     {
         public Notifies()
         {
-            Notificacoes = new List<Notifies>();
+            Notifications = new List<Notifies>();
         }
 
         [NotMapped]
-        public string NomePropriedade { get; set; }
+        public string PropertyName { get; set; }
         [NotMapped]
-        public string Mensagem { get; set; }
+        public string Message { get; set; }
         [NotMapped]
-        public IList<Notifies> Notificacoes { get; set; }
+        public IList<Notifies> Notifications { get; set; }
 
-        public bool ValidarPropriedadeString(string valor, string nomePropriedade)
+        public bool ValidateStringProperty(string value, string propertyName)
         {
-            if (string.IsNullOrWhiteSpace(valor) || string.IsNullOrWhiteSpace(nomePropriedade))
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(propertyName))
             {
-                Notificacoes.Add(new Notifies
+                Notifications.Add(new Notifies
                 {
-                    NomePropriedade = nomePropriedade,
-                    Mensagem = "Campo Obrigatório"
+                    PropertyName = propertyName,
+                    Message = "Campo Obrigatório"
                 });
                 return false;
             }
             return true;
         }
 
-        public bool ValidarPropriedadeInt(int valor, string nomePropriedade)
+        public bool ValidateIntProperty(int value, string propertyName)
         {
-            if (valor < 1 || string.IsNullOrWhiteSpace(nomePropriedade))
+            if (value < 1 || string.IsNullOrWhiteSpace(propertyName))
             {
-                Notificacoes.Add(new Notifies
+                Notifications.Add(new Notifies
                 {
-                    NomePropriedade = nomePropriedade,
-                    Mensagem = "Campo Obrigatório"
+                    PropertyName = propertyName,
+                    Message = "Campo Obrigatório"
                 });
                 return false;
             }

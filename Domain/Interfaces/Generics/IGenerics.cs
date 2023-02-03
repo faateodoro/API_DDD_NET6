@@ -11,7 +11,7 @@ namespace Domain.Interfaces.Generics
         Task Add(T objeto);
         Task Update(T objeto);
         Task Delete(T objeto);
-        Task<T> GetEntityById(int id);
-        Task<IList<T>> Get();
+        Task<T> GetById(int id);
+        Task<IList<T>> GetAll();
     }
 }

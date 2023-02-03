@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository.Generics
 {
-    public class RepositoryGenerics<T> : IGenerics<T>, IDisposable where T : class
+    public class GenericRepository<T> : IGenerics<T>, IDisposable where T : class
     {
-        private DbContextOptions<ContextBase> _OptionsBuilder;
+        private DbContextOptions<BaseContext> _OptionsBuilder;
 
-        public RepositoryGenerics()
+        public GenericRepository()
         {
-            _OptionsBuilder = new DbContextOptions<ContextBase>();
+            _OptionsBuilder = new DbContextOptions<BaseContext>();
         }
         public async Task Add(T objeto)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            using (var data = new BaseContext(_OptionsBuilder))
             {
                 await data.Set<T>().AddAsync(objeto);
                 await data.SaveChangesAsync();
@@ -30,24 +30,24 @@ namespace Infrastructure.Repository.Generics
 
         public async Task Delete(T objeto)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            using (var data = new BaseContext(_OptionsBuilder))
             {
                 data.Set<T>().Remove(objeto); 
                 await data.SaveChangesAsync();
             }
         }
 
-        public async Task<IList<T>> Get()
+        public async Task<IList<T>> GetAll()
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            using (var data = new BaseContext(_OptionsBuilder))
             {
                 return await data.Set<T>().ToListAsync();
             }
         }
 
-        public async Task<T> GetEntityById(int id)
+        public async Task<T> GetById(int id)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            using (var data = new BaseContext(_OptionsBuilder))
             {
                 return await data.Set<T>().FindAsync(id);
             }
@@ -55,7 +55,7 @@ namespace Infrastructure.Repository.Generics
 
         public async Task Update(T objeto)
         {
-            using (var data = new ContextBase(_OptionsBuilder))
+            using (var data = new BaseContext(_OptionsBuilder))
             {
                 data.Set<T>().Update(objeto);
                 await data.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace Infrastructure.Repository.Generics
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this); // Will this guy do what do we want?
         }
 
         // Protected implementation of Dispose pattern.

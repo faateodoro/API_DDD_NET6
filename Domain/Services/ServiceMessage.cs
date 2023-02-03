@@ -10,10 +10,10 @@ namespace Domain.Services
 {
     public class ServiceMessage : IServiceMessage
     {
-        private readonly IMessage _IMessage;
+        private readonly IMessage _message;
         public ServiceMessage(IMessage message)
         {
-            _IMessage = message;
+            _message = message;
         }
     }
 }
